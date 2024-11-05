@@ -59,7 +59,6 @@ body {
     border: 2px solid rgba(163, 87, 9, 1);
     border-radius: 8px;
     background-color: rgba(27, 26, 23, 1);
-    cursor: pointer;
     width: 70px;
     height: 70px;
     button {
@@ -145,13 +144,10 @@ body {
     gap: 10px;
   
     button {
-        background-color: transparent;
-        border: none;
         padding-top: 16px;
         padding-right: 16px;
         padding-bottom: 24px;
         border-radius: 4px;
-        cursor: pointer;
         margin-right: 5px;
         width: 32px;
         height: 32px;
@@ -171,7 +167,6 @@ body {
     img {
         background-color: transparent;
         background: none;
-        cursor: pointer;
     }
   
     button {
@@ -198,7 +193,6 @@ body {
     color: rgba(163, 87, 9, 1);
     border: 2px solid rgba(163, 87, 9, 1);
     border-radius: 8px;
-    cursor: pointer;
     margin-right: 16px;
     margin-top: 16px;
     margin-bottom: 24px;
@@ -214,9 +208,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(7, 7, 7, 0.89);
-    z-index: 999;
-    display: none;
+    background: rgba(7, 7, 7, 0.5);
+    z-index: 9;
   }
   
   .edit-container {
@@ -273,19 +266,12 @@ body {
     }
   }
   
-  .info-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(7, 7, 7, 0.89);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   
     .info-content {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       width: 90%;
       max-width: 500px;
       padding: 18px;
@@ -318,7 +304,7 @@ body {
         }
       }
     }
-  }
+  
   
   
   .share-menu {
@@ -336,7 +322,7 @@ body {
     gap: 16px;
     width: 80%;
     max-width: 500px;
-    z-index: 1000;
+    z-index: 10;
   
     button {
       width: 48px;
@@ -349,7 +335,7 @@ body {
     }
   }
   
-  .confirm {
+  .confirm-delete {
     width: 90%;
     max-width: 400px;
     position: fixed;
@@ -375,7 +361,7 @@ body {
         top: -4px;
         left: 0;
         right: 0;
-        height: 4px;
+        height: 8px;
         background-color: rgba(163, 87, 9, 1);
         border-radius: 8px 8px 0 0;
     }
@@ -390,21 +376,21 @@ body {
         gap: 10px;
         margin-top: 15px;
         justify-content: center;
-  
-        button {
-            font-size: 12px;
-            padding: 8px 12px;
-            border: 1px solid rgba(255, 131, 3, 1);
-            border-radius: 4px;
-            background-color: rgba(36, 35, 32, 1);
-            color: rgba(240, 227, 202, 0.64);
-            cursor: pointer;
-  
-            &:hover {
-                background-color: rgba(255, 131, 3, 0.1);
-            }
-        }
     }
+
+    button {
+      font-size: 12px;
+      padding: 8px 12px;
+      margin: 0 10px;
+      border: 1px solid rgba(255, 131, 3, 1);
+      border-radius: 4px;
+      background-color: rgba(36, 35, 32, 1);
+      color: rgba(240, 227, 202, 0.64);
+
+      &:hover {
+          background-color: rgba(255, 131, 3, 0.1);
+      }
+  }
   }
   
   #no-tasks-message {
