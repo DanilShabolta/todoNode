@@ -78,6 +78,7 @@ const TaskManager = () => {
         setConfirmDeleteTask(null);
         setActiveTaskIndex(null);
         setInfoVisible(false);
+        setEditVisible(false);
     };
 
     const toggleShareMenu = () => {
@@ -91,9 +92,10 @@ const TaskManager = () => {
     };
 
     const toggleEdit = (task) => {
-        setEditVisible(!editVisible);
+        setEditVisible(true);
         setTaskTitle(task.title);
         setTaskText(task.text);
+        setEditTask(task);
     }
 
     const handleDragStart = (index) => {//новая фича
@@ -210,12 +212,12 @@ const TaskManager = () => {
                         {editVisible && (
                             <div className='overlay' onClick={handleOverlayClick}>
                                 <div className='edit-container' onClick={(e) => e.stopPropagation()}>
-                                    <input type='text' className='edit-title'>{taskTitle}</input>
-                                    <textarea className='edit-description'>{taskText}</textarea>
+                                    <input type='text' className='edit-title' value={taskTitle}/>
+                                    <textarea className='edit-description' value={taskText}/>
                                     <div className='edit-buttons'>
-                                        <button onClick={saveEditTask}>Сохранить</button>
-                                        <button onClick={handleOverlayClick}>Отменить</button>
-                                    </div>
+                                        <button onClick={() => {saveEditTask(); handleOverlayClick();}}>Сохранить</button>
+                                        <button onClick={() => {setEditVisible(false); handleOverlayClick(); }}>Отменить</button>
+                                        </div>
                                 </div>
                             </div>
                         )}
