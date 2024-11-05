@@ -10,7 +10,10 @@ const TaskManager = () => {
     const [confirmDeleteTask, setConfirmDeleteTask] = useState(false);
     const [shareMenuVisible, setShareMenuVisible] = useState(false);
     const [infoVisible, setInfoVisible] = useState(false);
+    const [editVisible, setEditVisible] = useState(false);
     const [activeTaskIndex, setActiveTaskIndex] = useState(null);
+    const [draggedTaskIndex, setDraggedTaskIndex] = useState(null);
+
 
     useEffect(() => {
         loadTasks();
@@ -52,12 +55,6 @@ const TaskManager = () => {
         setConfirmDeleteTask(null);
     };
 
-    const startEditTask = (task) => {
-        setEditTask(task);
-        setTaskTitle(task.title);
-        setTaskText(task.text);
-    };
-
     const saveEditTask = () => {
         if (taskTitle.trim() && taskText.trim() && editTask) {
             const updatedTasks = tasks.map(task =>
@@ -93,6 +90,31 @@ const TaskManager = () => {
         setTaskTitle(task.title);
     };
 
+    const toggleEdit = (task) => {
+        setEditVisible(!editVisible);
+        setTaskTitle(task.title);
+        setTaskText(task.text);
+    }
+
+    const handleDragStart = (index) => {//новая фича
+        setDraggedTaskIndex(index);
+    };
+
+    const handleDragOver = (index) => {
+        if (draggedTaskIndex === null || draggedTaskIndex === index) return;
+        const updatedTasks = [...tasks];
+        const draggedTask = updatedTasks[draggedTaskIndex];
+        updatedTasks.splice(draggedTaskIndex, 1);
+        updatedTasks.splice(index, 0, draggedTask);
+        setTasks(updatedTasks);
+        setDraggedTaskIndex(index);
+        saveTaskToLocalStorage(updatedTasks);
+    };
+
+    const handleDragEnd = () => {
+        setDraggedTaskIndex(null);
+    };
+
     return (
         <div id="app">
             <div id="task-form">
@@ -113,13 +135,9 @@ const TaskManager = () => {
                             placeholder="Task Description"
                         />
                     </div>
-                    {editTask ? (  
-                        <button onClick={saveEditTask}>Save Edit</button>
-                    ) : (
                         <div className="add-button-container">
                             <button onClick={addTask}>+</button>
                         </div>
-                    )}
                 </div>
             </div>
 
@@ -128,7 +146,15 @@ const TaskManager = () => {
                 {tasks.map((task, index) => (
                     <div 
                         key={index} 
-                        className="task-container" 
+                        className="task-container"
+                        draggable={true}
+                        onDragStart={() => handleDragStart(index)}
+                        onDragOver={(e) => {
+                            e.preventDefault();
+                            handleDragOver(index);
+                        }}
+                        onDragEnd={handleDragEnd}
+
                         onClick={() => setActiveTaskIndex(activeTaskIndex === index ? null : index)}
                     >
                         <div className="task-main">
@@ -141,7 +167,7 @@ const TaskManager = () => {
                         
                         {activeTaskIndex === index && (
                             <div className="task-dropdown-menu">
-                                <button onClick={() => startEditTask(task)} className='edit-btn'><img src="./src/assets/button edit.png"/></button>
+                                <button onClick={() => toggleEdit(task)} className='edit-btn'><img src="./src/assets/button edit.png"/></button>
                                 <button onClick={toggleShareMenu}><img src="./src/assets/button share.png"/></button>
                                 <button onClick={() => toggleInfo(task)} className='info-btn'><img src="./src/assets/button info.png"/></button>
                                 </div>
@@ -178,6 +204,19 @@ const TaskManager = () => {
                                     <h3>{taskTitle}</h3>
                                     <p>{taskText}</p>
                                     </div>
+                            </div>
+                        )}
+
+                        {editVisible && (
+                            <div className='overlay' onClick={handleOverlayClick}>
+                                <div className='edit-container' onClick={(e) => e.stopPropagation()}>
+                                    <input type='text' className='edit-title'>{taskTitle}</input>
+                                    <textarea className='edit-description'>{taskText}</textarea>
+                                    <div className='edit-buttons'>
+                                        <button onClick={saveEditTask}>Сохранить</button>
+                                        <button onClick={handleOverlayClick}>Отменить</button>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>
