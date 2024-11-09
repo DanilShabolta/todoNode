@@ -153,6 +153,9 @@ li {
   border: 1px solid rgb(163, 87, 9);
   border-radius: 4px;
 }
+.task-actions button:hover {
+  background-color: rgba(255, 131, 3, 0.1);
+}
 
 .task-dropdown-menu {
   display: none;
@@ -161,10 +164,6 @@ li {
   display: flex;
   justify-content: flex-end;
 }
-.task-dropdown-menu img {
-  background-color: transparent;
-  background: none;
-}
 .task-dropdown-menu button {
   padding: 8;
   border-radius: 4px;
@@ -172,7 +171,12 @@ li {
   height: 36px;
   width: 36px;
 }
-.task-dropdown-menu img {
+.task-dropdown-menu button:hover {
+  background-color: rgba(255, 131, 3, 0.1);
+}
+.task-dropdown-menu button img {
+  background-color: transparent;
+  background: none;
   height: 36px;
   width: 36px;
 }
@@ -193,6 +197,9 @@ li {
   height: 35px;
   width: 35px;
   align-items: center;
+}
+.delete-btn:hover {
+  background-color: rgba(255, 131, 3, 0.1);
 }
 
 .overlay {
@@ -255,6 +262,9 @@ li {
   border-radius: 4px;
   background-color: rgb(36, 35, 32);
 }
+.edit-container .edit-buttons button:hover {
+  background-color: rgba(255, 131, 3, 0.1);
+}
 
 .info-content {
   position: fixed;
@@ -286,6 +296,9 @@ li {
   border-radius: 4px;
   background-color: rgb(36, 35, 32);
   margin-top: 10px;
+}
+.info-content button:hover {
+  background-color: rgba(255, 131, 3, 0.1);
 }
 .info-content button img {
   width: 48px;

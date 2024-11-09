@@ -73,12 +73,15 @@ const TaskManager = () => {
         setOverlayVisible(true);
     };
 
-    const handleOverlayClick = () => {// сброс оверлея и выделенной задачи
+    const handleOverlayClick = (e) => {// сброс оверлея и выделенной задачи
+        e.stopPropagation();
         setShareMenuVisible(false);
         setConfirmDeleteTask(null);
         setActiveTaskIndex(null);
         setInfoVisible(false);
         setEditVisible(false);
+        setTaskTitle('');
+        setTaskText('');
     };
 
     const toggleShareMenu = () => {
@@ -97,6 +100,14 @@ const TaskManager = () => {
         setTaskText(task.text);
         setEditTask(task);
     }
+
+    const handleTitleChange = (event) => {
+        setTaskTitle(event.target.value);
+    };
+
+    const handleTextChange = (event) => {
+        setTaskText(event.target.value);
+    };
 
     const handleDragStart = (index) => {//новая фича
         setDraggedTaskIndex(index);
@@ -191,11 +202,11 @@ const TaskManager = () => {
                         {shareMenuVisible &&(
                             <div className='overlay' onClick={handleOverlayClick}>
                             <div className="share-menu" onClick={(e) => e.stopPropagation()}>
-                                <button class="share-copy"><img src="./src/assets/share/share copy.png" alt="Share Copy"/></button>
-                                <button class="share-vk"><img src="./src/assets/share/share vk.png" alt="Share VK"/></button>
-                                <button class="share-tg"><img src="./src/assets/share/share tg.svg" alt="Share TG"/></button>
-                                <button class="share-ws"><img src="./src/assets/share/share ws.svg" alt="Share WS"/></button>
-                                <button class="share-fb"><img src="./src/assets/share/share fb.svg" alt="Share FB"/></button>
+                                <button className='share-copy'><img src="./src/assets/share/share copy.png" alt="Share Copy"/></button>
+                                <button className='share-vk'><img src="./src/assets/share/share vk.png" alt="Share VK"/></button>
+                                <button className='share-tg'><img src="./src/assets/share/share tg.svg" alt="Share TG"/></button>
+                                <button className='share-ws'><img src="./src/assets/share/share ws.svg" alt="Share WS"/></button>
+                                <button className='share-fb'><img src="./src/assets/share/share fb.svg" alt="Share FB"/></button>
                             </div>
                             </div>
                         )}
@@ -205,18 +216,19 @@ const TaskManager = () => {
                                 <div className='info-content' onClick={(e) => e.stopPropagation()}>
                                     <h3>{taskTitle}</h3>
                                     <p>{taskText}</p>
+                                    <button onClick={handleOverlayClick}>ok</button>
                                     </div>
                             </div>
                         )}
 
                         {editVisible && (
                             <div className='overlay' onClick={handleOverlayClick}>
-                                <div className='edit-container' onClick={(e) => e.stopPropagation()}>
-                                    <input type='text' className='edit-title' value={taskTitle}/>
-                                    <textarea className='edit-description' value={taskText}/>
+                                <div className='edit-container'>
+                                    <input type='text' className='edit-title' value={taskTitle} onChange={handleTitleChange}/>
+                                    <textarea className='edit-description' value={taskText} onChange={handleTextChange}/>
                                     <div className='edit-buttons'>
-                                        <button onClick={() => {saveEditTask(); handleOverlayClick();}}>Сохранить</button>
-                                        <button onClick={() => {setEditVisible(false); handleOverlayClick(); }}>Отменить</button>
+                                        <button onClick={() => {saveEditTask(); setEditVisible(false); handleOverlayClick();}}>Сохранить</button>
+                                        <button onClick={() => {setEditVisible(false); handleOverlayClick; }}>Отменить</button>
                                         </div>
                                 </div>
                             </div>
