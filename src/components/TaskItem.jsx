@@ -1,9 +1,15 @@
 import React from 'react';
 import '../style.css';
 
-const TaskItem = ({ task, removeTask }) => {
+const TaskItem = ({ task, removeTask, onDragStart, onDragOver, onDragEnd }) => {
     return (
-        <div className="task-container">
+        <div 
+            className="task-container"
+            draggable={true}
+            onDragStart={onDragStart}
+            onDragOver={onDragOver}
+            onDragEnd={onDragEnd}
+        >
             <div className="task-main">
                 <div className='task-container-text'>
                     <h3 className="task-title">{task.title}</h3>
