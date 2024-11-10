@@ -94,6 +94,7 @@ li {
 }
 
 .task-main {
+  z-index: 2;
   border-color: rgb(163, 87, 9);
   border-radius: 8px;
   border-width: 2px;
@@ -115,6 +116,7 @@ li {
 }
 
 .task-container-text {
+  z-index: 2;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -142,6 +144,7 @@ li {
 }
 
 .task-actions {
+  z-index: 2;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -164,30 +167,47 @@ li {
 }
 
 .task-dropdown-menu {
+  z-index: 1;
+  visibility: hidden;
   display: none;
+  opacity: 0;
   margin-top: 10px;
   margin-bottom: 16px;
-  display: flex;
+  gap: 5px;
   justify-content: flex-end;
+  transform: translateY(-30px);
+  transition: visibility 0s 0.3s, opacity 1s ease, transform 1s ease;
 }
 .task-dropdown-menu button {
-  padding: 8;
+  padding: 0;
   border-radius: 4px;
-  margin-right: 5px;
   height: 36px;
   width: 36px;
-}
-.task-dropdown-menu button:hover {
-  background-color: rgba(255, 131, 3, 0.1);
+  align-items: center;
+  justify-content: center;
 }
 .task-dropdown-menu button img {
   background-color: transparent;
   background: none;
   height: 36px;
   width: 36px;
+  transition: 0.3s;
+}
+.task-dropdown-menu button img:hover {
+  transform: scale(0.9);
+}
+
+.task-dropdown-menu.visible {
+  z-index: 1;
+  visibility: visible;
+  display: flex;
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 0.3s ease, transform 1s ease;
 }
 
 #task-container {
+  z-index: 2;
   display: flex;
   flex-direction: column;
 }

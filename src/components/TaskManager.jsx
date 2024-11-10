@@ -3,11 +3,21 @@ import TaskForm from './TaskForm';
 import TaskList from './TaskList';
 import '../style.css';
 import { getTasksFromLocalStorage, saveTaskToLocalStorage } from './taskStorage';
+import Info from './info';
+import Edit from './edit';
+import ShareMenu from './shareMenu';
+import ConfirmDelete from './confirmDelete';
 
 const TaskManager = () => {
     const [tasks, setTasks] = useState([]);
     const [draggedTaskIndex, setDraggedTaskIndex] = useState(null);
     const [showNoTasksMessage, setShowNoTasksMessage] = useState(true);
+    const [isInfoVisible, setInfoVisible] = useState(false);
+    const [isEditVisible, setEditVisible] = useState(false);
+    const [isShareMenuVisible, setShareMenuVisible] = useState(false)
+    const [isConfirmDeleteVisible, setConfirmDeleteVisible] = useState(false)
+    const [selectedTask, setSelectedTask] = useState(null);
+
     
     useEffect(() => {
         loadTasks();
@@ -31,6 +41,7 @@ const TaskManager = () => {
         setTasks(updatedTasks);
         saveTaskToLocalStorage(updatedTasks);
         setShowNoTasksMessage(updatedTasks.length === 0);
+        setConfirmDeleteVisible(false);
     };
 
     const handleDragStart = (index) => {
@@ -54,6 +65,47 @@ const TaskManager = () => {
         setDraggedTaskIndex(null);
     };
 
+    const closeModal = () => {
+        setShareMenuVisible(false);
+        setEditVisible(false);
+        setInfoVisible(false);
+        setSelectedTask(null);
+        setConfirmDeleteVisible(false);
+    };
+    //меню поделиться
+    const openInfo = (task) => {
+        setSelectedTask(task);
+        setInfoVisible(true);
+    };
+
+    const openEdit = (task) => {
+        setSelectedTask(task);
+        setEditVisible(true);
+    };
+
+    const openShareMenu = (task) => {
+        setSelectedTask(task);
+        setShareMenuVisible(true);
+    }
+
+    const openConfirm = (task) => {
+        setSelectedTask(task);
+        setConfirmDeleteVisible(true);
+    }
+
+    const saveEditTask = ({ title, text }) => {
+        if (selectedTask) {
+            const updatedTasks = tasks.map(task =>
+                task === selectedTask ? { ...task, title, text } : task
+            );
+            setTasks(updatedTasks);
+            saveTaskToLocalStorage(updatedTasks);
+            setSelectedTask(null);
+        }
+    };
+
+    
+
     return (
         <div id="app">
             <TaskForm addTask={addTask} />
@@ -63,8 +115,39 @@ const TaskManager = () => {
                 removeTask={removeTask} 
                 handleDragStart={handleDragStart} 
                 handleDragOver={handleDragOver} 
-                handleDragEnd={handleDragEnd} 
+                handleDragEnd={handleDragEnd}
+                openInfo={openInfo}
+                openEdit={openEdit}
+                openShareMenu={openShareMenu}
+                openConfirm={openConfirm}
             />
+            {isInfoVisible && selectedTask && (
+                <Info 
+                    taskTitle={selectedTask.title} 
+                    taskText={selectedTask.text} 
+                    onClose={closeModal} 
+                />
+            )}
+            {isEditVisible && selectedTask && (
+                <Edit
+                    taskTitle={selectedTask.title}
+                    taskText={selectedTask.text}
+                    onClose={closeModal}
+                    saveEditTask={saveEditTask}
+                />
+            )}
+            {isShareMenuVisible && selectedTask && (
+                <ShareMenu
+                    onClose={closeModal}
+                />
+            )}
+            {isConfirmDeleteVisible && selectedTask && (
+                    <ConfirmDelete 
+                    onClose={closeModal}
+                    removeTask={() => removeTask(selectedTask)}
+                    />
+            )}
+            
         </div>
     );
 };
