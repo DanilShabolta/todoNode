@@ -4,6 +4,7 @@ import TaskList from './TaskList';
 import '../style.css';
 import { getTasksFromLocalStorage, saveTaskToLocalStorage } from './taskStorage';
 
+
 const TaskManager = () => {
     const [tasks, setTasks] = useState([]);
     const [showNoTasksMessage, setShowNoTasksMessage] = useState(true);

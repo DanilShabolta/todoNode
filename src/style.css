@@ -61,10 +61,11 @@ input[type=text] {
   background-color: rgb(27, 26, 23);
   width: 70px;
   height: 70px;
-}
-.add-button-container button {
   font-size: 50px;
   color: rgb(163, 87, 9);
+}
+.add-button-container:hover {
+  background-color: rgba(255, 131, 3, 0.1);
 }
 
 #task-description {
@@ -106,9 +107,14 @@ li {
   margin-top: 16px;
   height: 72px;
   width: 100%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.task-main:hover {
+  background-color: rgba(255, 131, 3, 0.1);
 }
 
-#task-container-text {
+.task-container-text {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -118,13 +124,13 @@ li {
   margin-left: 16px;
   margin-bottom: 10px;
 }
-#task-container-text h3 {
+.task-container-text h3 {
   font-size: 22px;
   font-weight: 500;
   line-height: 22.78px;
   margin: 0;
 }
-#task-container-text p {
+.task-container-text p {
   font-size: 14px;
   font-weight: 400;
   line-height: 16.41px;
@@ -187,10 +193,18 @@ li {
 }
 
 .delete-btn {
-  background: rgb(27, 26, 23);
-  color: rgb(163, 87, 9);
-  border: 2px solid rgb(163, 87, 9);
+  --glow-color: rgb(163, 87, 9, 1);
+  --glow-spread-color: rgba(163, 87, 9, 1);
+  --enhanced-glow-color: rgb(231, 206, 255);
+  --btn-color: rgb(27, 26, 23, 1);
+  background: var(--btn-color);
+  color: var(--glow-color);
+  outline: none;
+  border: 2px solid var(--glow-color);
   border-radius: 8px;
+  box-shadow: 0 0 1px var(--glow-color), 0 0 4px 1px var(--glow-spread-color), inset 0 0 0.75px 0.25px var(--glow-color);
+  text-shadow: 0 0 0.75px var(--glow-color);
+  transition: all 0.3s;
   margin-right: 16px;
   margin-top: 16px;
   margin-bottom: 24px;
@@ -198,8 +212,24 @@ li {
   width: 35px;
   align-items: center;
 }
+.delete-btn::after {
+  pointer-events: none;
+  content: "";
+  top: 120%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--glow-spread-color);
+  filter: blur(2px);
+  opacity: 0.7;
+  transform: perspective(1.5px) rotateX("35deg") scale(1, 0.6);
+}
 .delete-btn:hover {
   background-color: rgba(255, 131, 3, 0.1);
+  box-shadow: 0 0 5px 2.25px var(--glow-color), 0 0 12px 2px var(--glow-spread-color), inset 0 0 1.75px 1.25px var(--glow-color);
+}
+.delete-btn:active {
+  box-shadow: 0 0 0.6em 0.25em var(--glow-color), 0 0 2.5em 2em var(--glow-spread-color), inset 0 0 0.5em 0.25em var(--glow-color);
 }
 
 .overlay {

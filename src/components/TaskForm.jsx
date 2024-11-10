@@ -18,6 +18,7 @@ const TaskForm = ({ addTask }) => {
     return (
         <div id="task-form">
             <div id="task-input-container">
+                <div className='task-input-text'>
                 <input
                     type="text"
                     value={taskTitle}
@@ -30,7 +31,8 @@ const TaskForm = ({ addTask }) => {
                     onChange={(e) => setTaskText(e.target.value)}
                     placeholder="Task Description"
                 />
-                <button onClick={handleAddTask}>+</button>
+                </div>
+                <button onClick={handleAddTask} className='add-button-container'>+</button>
             </div>
         </div>
     );
