@@ -1,0 +1,181 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 7, 7, 0.5);
+  z-index: 9;
+}
+
+.edit-container {
+  width: 90%;
+  max-width: 500px;
+  max-height: calc(100vh - 40px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 0;
+  background-color: rgb(27, 26, 23);
+  border-radius: 8px;
+  padding-bottom: 16px;
+  padding-left: 18px;
+  padding-top: 18px;
+  padding-right: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+.edit-container input[type=text],
+.edit-container textarea {
+  text-align: left;
+  width: 100%;
+  max-height: 290px;
+  padding: 10px;
+  border: 1px solid rgb(255, 131, 3);
+  border-radius: 4px;
+  background-color: rgb(36, 35, 32);
+  color: rgba(240, 227, 202, 0.64);
+  box-sizing: border-box;
+}
+.edit-container .edit-buttons {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+.edit-container .edit-buttons button {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  height: 24px;
+  width: 64px;
+  margin-right: 12px;
+  margin-left: 12px;
+  color: rgb(217, 217, 217);
+  border: 1px solid rgb(163, 87, 9);
+  border-radius: 4px;
+  background-color: rgb(36, 35, 32);
+}
+.edit-container .edit-buttons button:hover {
+  background-color: rgba(255, 131, 3, 0.1);
+}
+
+.info-content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  padding: 18px;
+  border: 1px solid rgb(255, 131, 3);
+  border-radius: 8px;
+  background-color: rgb(36, 35, 32);
+  color: rgba(240, 227, 202, 0.64);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.info-content button {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  height: 24px;
+  width: 64px;
+  color: rgb(217, 217, 217);
+  border: 1px solid rgb(163, 87, 9);
+  border-radius: 4px;
+  background-color: rgb(36, 35, 32);
+  margin-top: 10px;
+}
+.info-content button:hover {
+  background-color: rgba(255, 131, 3, 0.1);
+}
+.info-content button img {
+  width: 48px;
+  height: 48px;
+}
+
+.share-menu {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid rgb(255, 131, 3);
+  border-radius: 8px;
+  background-color: rgb(36, 35, 32);
+  padding: 16px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 80%;
+  max-width: 500px;
+  z-index: 10;
+}
+.share-menu button {
+  width: 48px;
+  height: 48px;
+}
+.share-menu button img {
+  width: 48px;
+  height: 48px;
+}
+
+.confirm-delete {
+  width: 90%;
+  max-width: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(36, 35, 32);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: rgba(240, 227, 202, 0.64);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.confirm-delete::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background-color: rgb(163, 87, 9);
+  border-radius: 8px 8px 0 0;
+}
+.confirm-delete h2 {
+  margin: 0;
+  text-align: center;
+}
+.confirm-delete .confirm-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+}
+.confirm-delete button {
+  font-size: 12px;
+  padding: 8px 12px;
+  margin: 0 10px;
+  border: 1px solid rgb(255, 131, 3);
+  border-radius: 4px;
+  background-color: rgb(36, 35, 32);
+  color: rgba(240, 227, 202, 0.64);
+}
+.confirm-delete button:hover {
+  background-color: rgba(255, 131, 3, 0.1);
+}/*# sourceMappingURL=modals.css.map */

@@ -1,0 +1,49 @@
+#task-form {
+  display: flex;
+  flex-direction: row;
+}
+
+#task-input-container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  justify-content: flex-start;
+}
+
+.task-input-text {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"] {
+  width: 95%;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 10px;
+  margin-right: 8px;
+  border: 1px solid rgba(255, 131, 3, 1);
+  border-radius: 4px;
+  background-color: rgba(36, 35, 32, 1);
+  margin-bottom: 10px;
+  color: rgba(240, 227, 202, 0.64);
+}
+
+.add-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border: 2px solid rgba(163, 87, 9, 1);
+  border-radius: 8px;
+  background-color: rgba(27, 26, 23, 1);
+  width: 70px;
+  height: 70px;
+  font-size: 50px;
+  color: rgba(163, 87, 9, 1);
+  &:hover {
+    background-color: rgba(255, 131, 3, 0.1);
+  }
+}
