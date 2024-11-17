@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../style.css';
+import '../../style.css';
 
 const Edit = ({ taskTitle, taskText, onClose, saveEditTask }) => {
     const [title, setTitle] = useState(taskTitle);
@@ -21,7 +21,7 @@ const Edit = ({ taskTitle, taskText, onClose, saveEditTask }) => {
     const handleSave = () => {
         if (title.trim() && text.trim()) {
             saveEditTask({ title, text });
-            onClose(); // Закрыть окно после сохранения
+            onClose();
         }
     };
 

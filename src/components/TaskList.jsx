@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskItem from './TaskItem';
+import TaskItem from './ui/TaskItem';
 
 const TaskList = ({ tasks, handleDragStart, handleDragOver,
      handleDragEnd, openInfo, openEdit, openShareMenu, openConfirm}) => {

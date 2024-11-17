@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import TaskForm from './TaskForm';
+import TaskForm from './ui/TaskForm';
 import TaskList from './TaskList';
 import '../style.css';
-import { getTasksFromLocalStorage, saveTaskToLocalStorage } from './taskStorage';
-import Info from './info';
-import Edit from './edit';
-import ShareMenu from './shareMenu';
-import ConfirmDelete from './confirmDelete';
+import { getTasksFromLocalStorage, saveTaskToLocalStorage } from './domain/TaskStorage';
+import Info from './ui/Info';
+import Edit from './ui/Edit';
+import ShareMenu from './ui/ShareMenu';
+import ConfirmDelete from './ui/ConfirmDelete';
 
 const TaskManager = () => {
     const [tasks, setTasks] = useState([]);
@@ -72,7 +72,7 @@ const TaskManager = () => {
         setSelectedTask(null);
         setConfirmDeleteVisible(false);
     };
-    //меню поделиться
+
     const openInfo = (task) => {
         setSelectedTask(task);
         setInfoVisible(true);
@@ -121,32 +121,32 @@ const TaskManager = () => {
                 openShareMenu={openShareMenu}
                 openConfirm={openConfirm}
             />
-            {isInfoVisible && selectedTask && (
+
+            {selectedTask && (isInfoVisible &&  (
                 <Info 
                     taskTitle={selectedTask.title} 
                     taskText={selectedTask.text} 
                     onClose={closeModal} 
                 />
-            )}
-            {isEditVisible && selectedTask && (
+            ) || (isEditVisible &&(
                 <Edit
                     taskTitle={selectedTask.title}
                     taskText={selectedTask.text}
                     onClose={closeModal}
                     saveEditTask={saveEditTask}
                 />
-            )}
-            {isShareMenuVisible && selectedTask && (
+            )) || (isShareMenuVisible &&(
                 <ShareMenu
                     onClose={closeModal}
                 />
-            )}
-            {isConfirmDeleteVisible && selectedTask && (
+            )) || (isConfirmDeleteVisible &&(
                     <ConfirmDelete 
                     onClose={closeModal}
                     removeTask={() => removeTask(selectedTask)}
                     />
-            )}
+            ))
+            )
+            }
             
         </div>
     );

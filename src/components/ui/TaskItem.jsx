@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../style.css';
+import '../../style.css';
 
 const TaskItem = ({ task, onDragStart, onDragOver, onDragEnd, openInfo, editTask, openShareMenu, openConfirm}) => {
     const [isMenuVisible, setMenuVisible] = useState(false);
